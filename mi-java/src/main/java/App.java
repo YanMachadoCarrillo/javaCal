@@ -2,12 +2,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
 @RestController
-@CrossOrigin(origins = "*")
 public class App {
 
     public static void main(String[] args) {
@@ -15,34 +13,31 @@ public class App {
     }
 
     @GetMapping("/calcular")
-    public Map<String, Object> calcular(
+    public Map<String, Double> calcular(
             @RequestParam double a,
             @RequestParam double b,
-            @RequestParam String op) {
-
-        Map<String, Object> res = new HashMap<>();
+            @RequestParam String op
+    ) {
+        double resultado = 0;
 
         switch (op) {
             case "suma":
-                res.put("resultado", a + b);
+                resultado = a + b;
                 break;
             case "resta":
-                res.put("resultado", a - b);
+                resultado = a - b;
                 break;
             case "multiplicacion":
-                res.put("resultado", a * b);
+                resultado = a * b;
                 break;
             case "division":
                 if (b == 0) {
-                    res.put("error", "División por cero");
-                    return res;
+                    throw new RuntimeException("No se puede dividir por 0");
                 }
-                res.put("resultado", a / b);
+                resultado = a / b;
                 break;
-            default:
-                res.put("error", "Operación inválida");
         }
 
-        return res;
+        return Map.of("resultado", resultado);
     }
 }
