@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
+@CrossOrigin(origins = "*") // Permite peticiones desde otros dominios
 @SpringBootApplication
 @RestController
 public class App {
