@@ -8,6 +8,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @RestController
+@CrossOrigin(origins = "*") // <--- AGREGA ESTA LÍNEA AQUÍ
 public class App {
 
     public static void main(String[] args) {
